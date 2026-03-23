@@ -1,0 +1,17 @@
+---
+# BridgeDB - SURF Research Cloud Component
+# Deploys BridgeDB identifier mapping service via Docker.
+#
+# Expected SURF components before this one:
+#   1. SRC-OS
+#   2. SRC-CO
+#   3. SRC-Nginx
+#   4. SRC-External
+
+- name: Deploy BridgeDB
+  hosts: all
+  become: true
+  gather_facts: true
+
+  roles:
+    - role: bridgedb

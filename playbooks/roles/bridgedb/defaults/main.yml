@@ -1,0 +1,5 @@
+---
+bridgedb_image: "bigcatum/bridgedb"
+bridgedb_tag: "latest"
+bridgedb_port: 8183
+bridgedb_container_name: "BRIDGEDB"
