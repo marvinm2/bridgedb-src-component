@@ -27,7 +27,7 @@
       --name {{ bridgedb_container_name }}
       --restart always
       -p {{ bridgedb_port }}:8183
-      -e SERVER_URL=localhost:{{ bridgedb_port }}
+      -e SERVER_URL=http://localhost:{{ bridgedb_port }}
       {{ bridgedb_image }}:{{ bridgedb_tag }}
   changed_when: true
 
