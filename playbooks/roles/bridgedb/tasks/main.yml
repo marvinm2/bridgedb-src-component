@@ -31,14 +31,9 @@
       {{ bridgedb_image }}:{{ bridgedb_tag }}
   changed_when: true
 
-- name: Wait for BridgeDB to be ready
-  ansible.builtin.uri:
-    url: "http://localhost:{{ bridgedb_port }}"
-    status_code: [200, 302]
-  register: bridgedb_ready
-  retries: 30
-  delay: 10
-  until: bridgedb_ready.status in [200, 302]
+- name: Wait for BridgeDB container to start
+  ansible.builtin.pause:
+    seconds: 10
 
 - name: Deploy nginx reverse proxy configuration
   ansible.builtin.template:
