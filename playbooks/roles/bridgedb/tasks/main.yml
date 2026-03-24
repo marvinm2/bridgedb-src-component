@@ -28,6 +28,12 @@
     cmd: "docker pull {{ bridgedb_image }}:{{ bridgedb_tag }}"
   changed_when: true
 
+- name: Get workspace FQDN
+  ansible.builtin.command:
+    cmd: cat /etc/hostname
+  register: workspace_fqdn
+  changed_when: false
+
 - name: Run BridgeDB container
   ansible.builtin.command:
     cmd: >
@@ -35,6 +41,7 @@
       --name {{ bridgedb_container_name }}
       --restart always
       -p {{ bridgedb_port }}:8183
+      -e SERVER_URL=https://{{ workspace_fqdn.stdout }}
       {{ bridgedb_image }}:{{ bridgedb_tag }}
   changed_when: true
 
