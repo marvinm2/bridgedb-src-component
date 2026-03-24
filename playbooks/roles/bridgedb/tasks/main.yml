@@ -15,6 +15,14 @@
     state: started
     enabled: true
 
+- name: Add all sudoers-group users to docker group
+  ansible.builtin.shell:
+    cmd: |
+      for user in $(getent group sudoers | cut -d: -f4 | tr ',' ' '); do
+        usermod -aG docker "$user" 2>/dev/null || true
+      done
+  changed_when: true
+
 - name: Pull BridgeDB Docker image
   ansible.builtin.command:
     cmd: "docker pull {{ bridgedb_image }}:{{ bridgedb_tag }}"
@@ -27,13 +35,17 @@
       --name {{ bridgedb_container_name }}
       --restart always
       -p {{ bridgedb_port }}:8183
-      -e SERVER_URL=http://localhost:{{ bridgedb_port }}
       {{ bridgedb_image }}:{{ bridgedb_tag }}
   changed_when: true
 
 - name: Wait for BridgeDB container to start
   ansible.builtin.pause:
-    seconds: 10
+    seconds: 30
+
+- name: Capture BridgeDB startup logs
+  ansible.builtin.shell:
+    cmd: "docker logs {{ bridgedb_container_name }} > /var/log/bridgedb-startup.log 2>&1"
+  changed_when: true
 
 - name: Deploy nginx reverse proxy configuration
   ansible.builtin.template:
