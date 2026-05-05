@@ -21,7 +21,7 @@ Ansible playbook component for deploying [BridgeDB](https://www.bridgedb.org/) i
 ### Component registration
 
 - **Script type**: Ansible Playbook
-- **Repository URL**: `https://github.com/<your-org>/bridgedb-src-component.git`
+- **Repository URL**: `https://github.com/marvinm2/bridgedb-src-component.git`
 - **Script path**: `playbooks/bridgedb.yml`
 - **Tag/Branch**: `main`
 
