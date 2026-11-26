@@ -29,8 +29,8 @@ Ansible playbook component for deploying [BridgeDB](https://www.bridgedb.org/) i
 
 | Key                      | Default              | Description                    |
 |--------------------------|----------------------|--------------------------------|
-| `bridgedb_image`         | `bigcatum/bridgedb`  | Docker image                   |
-| `bridgedb_tag`           | `latest`             | Docker image tag               |
+| `bridgedb_image`         | `youphendriks/bridgedb` | Docker image                |
+| `bridgedb_tag`           | `4.0.0-2.1.9-beta`   | Docker image tag               |
 | `bridgedb_port`          | `8183`               | Host port for BridgeDB         |
 | `bridgedb_container_name`| `BRIDGEDB`           | Docker container name          |
 
